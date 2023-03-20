@@ -1,0 +1,50 @@
+name: Playwright Tests
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  S3_BUCKET_NAME: nutrisense-webflow-test-runs
+
+jobs:
+  test:
+    timeout-minutes: 300
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14.x'
+    - name: Install dependencies
+      run: npm ci
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps
+    - name: Run Playwright tests
+      run: npx playwright test --workers 4
+    - uses: actions/upload-artifact@v3
+      if: ${{ always() }}
+      with:
+        name: ${{ github.run_id }}
+        path: playwright-report/
+        retention-days: 7
+    - uses: actions/upload-artifact@v3
+      if: ${{ always() }}
+      with:
+        name: results.json
+        path: results.json
+  
+  uploadTestResultsToS3:
+      name: "Upload Test Results to S3 bucket"
+      needs: test
+      runs-on: ubuntu-latest
+      if: ${{ failure() }}
+      steps:
+        - name: Download artifacts
+          uses: actions/download-artifact@v2
+          id: download
+        

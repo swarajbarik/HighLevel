@@ -1,0 +1,34 @@
+{
+  "name": "nutrisense-webflow-testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nutrisense/nutrisense-webflow-testing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nutrisense/nutrisense-webflow-testing/issues"
+  },
+  "homepage": "https://github.com/nutrisense/nutrisense-webflow-testing#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
+    "@playwright/test": "^1.25.0",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.41",
+    "zip-local": "^0.3.5"
+  },
+  "dependencies": {
+    "@slack/web-api": "^6.7.2",
+    "app-root-path": "^3.1.0",
+    "dotenv": "^16.0.2",
+    "fast-glob": "^3.2.11",
+    "playwright-tesults-reporter": "^1.0.0"
+  }
+}
