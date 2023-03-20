@@ -2,7 +2,7 @@
 This repository uses [Playwright](https://playwright.dev/) to complete the appointment booking on https://app.gohighlevel.com/
 
 ### Run Tests
-`npx playwright test`
+`npm run test`
 
 # GitHub Actions
 On an hourly basis, we run the full test suite in GitHub Actions. We also run it on each PR changing the tests
